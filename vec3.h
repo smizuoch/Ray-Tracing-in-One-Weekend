@@ -55,8 +55,73 @@ public:
 	double e[3];
 };
 
-// Vec3 の型エイリアス
 using point3 = vec3;   // 3D 点
 using color = vec3;    // RGB 色
+
+// vec3 ユーティリティ関数
+
+// 出力ストリームへの書き込み
+inline std::ostream& operator<<(std::ostream &out, const vec3 &v)
+{
+	return out << v.e[0] << ' ' << v.e[1] << ' ' << v.e[2];
+}
+
+// ベクトルの加算
+inline vec3 operator+(const vec3 &u, const vec3 &v)
+{
+	return vec3(u.e[0] + v.e[0], u.e[1] + v.e[1], u.e[2] + v.e[2]);
+}
+
+// ベクトルの減算
+inline vec3 operator-(const vec3 &u, const vec3 &v)
+{
+	return vec3(u.e[0] - v.e[0], u.e[1] - v.e[1], u.e[2] - v.e[2]);
+}
+
+// ベクトルの要素ごとの乗算
+inline vec3 operator*(const vec3 &u, const vec3 &v)
+{
+	return vec3(u.e[0] * v.e[0], u.e[1] * v.e[1], u.e[2] * v.e[2]);
+}
+
+// スカラー倍（左側）
+inline vec3 operator*(double t, const vec3 &v)
+{
+	return vec3(t*v.e[0], t*v.e[1], t*v.e[2]);
+}
+
+// スカラー倍（右側）
+inline vec3 operator*(const vec3 &v, double t)
+{
+	return t * v;
+}
+
+// スカラー除算
+inline vec3 operator/(vec3 v, double t)
+{
+	return (1/t) * v;
+}
+
+// 内積
+inline double dot(const vec3 &u, const vec3 &v)
+{
+	return u.e[0] * v.e[0]
+		 + u.e[1] * v.e[1]
+		 + u.e[2] * v.e[2];
+}
+
+// 外積
+inline vec3 cross(const vec3 &u, const vec3 &v)
+{
+	return vec3(u.e[1] * v.e[2] - u.e[2] * v.e[1],
+				u.e[2] * v.e[0] - u.e[0] * v.e[2],
+				u.e[0] * v.e[1] - u.e[1] * v.e[0]);
+}
+
+// 単位ベクトル
+inline vec3 unit_vector(vec3 v)
+{
+	return v / v.length();
+}
 
 #endif
