@@ -16,6 +16,7 @@ int	main(int ac, char **av)
 	{
 		for(int i = 0; i < image_width; ++i)
 		{
+			std::cerr << "\rScanlines remaining: " << j << ' ' << std::flush;
 			double r = double(i) / (image_width - 1);
 			double g = double(j) / (image_height - 1);
 			double b = 0.25;
@@ -27,4 +28,6 @@ int	main(int ac, char **av)
 			std::cout << ir << ' ' << ig << ' ' << ib << '\n';
 		}
 	}
+	std::cerr << "\nDone.\n";
+	return 0;
 }
