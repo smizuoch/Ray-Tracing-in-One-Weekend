@@ -42,3 +42,6 @@
 
 # image files
 *.ppm
+
+# vscode settings
+.vscode/
