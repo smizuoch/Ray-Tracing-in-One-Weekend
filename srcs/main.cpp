@@ -6,6 +6,7 @@ int	main(int ac, char **av)
 {
 	if(ac >= 4)
 	{
+		(void)av;
 		std::cout << "Wrong number of arguments." << std::endl;
 		return 1;
 	}
