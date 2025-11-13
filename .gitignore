@@ -37,6 +37,7 @@ objs/
 *.exe
 *.out
 *.app
+inOneWeekend
 
 # debug information files
 *.dwo
