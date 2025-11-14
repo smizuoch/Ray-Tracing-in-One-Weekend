@@ -3,6 +3,7 @@ CONTAINER		=	inOneWeekend
 CC				=	c++
 FLAGS			=	-Wall -Wextra -Werror
 RM				=	rm -rf
+PPM2PNG			=	docker run --rm -v "$(CURDIR)":/work -w /work jrottenberg/ffmpeg -y -loglevel error -i
 
 SRCS_DIR		=	srcs/
 INCS_DIR		=	includes/
@@ -37,6 +38,14 @@ $(OBJS_DIR)%.o : %.cpp
 image: all
 	@./$(NAME) >> image.ppm
 
+ppm : image
+
+png : image
+	@mkdir -p images
+	@timestamp=$$(date +%Y%m%d_%H%M%S); \
+	$(PPM2PNG) image.ppm "images/image_$${timestamp}.png"; \
+	echo "\033[1;32mimages/image_$${timestamp}.png created successfully!\033[0m"
+
 clean:
 	$(RM) $(OBJS_DIR)
 
@@ -55,4 +64,4 @@ leaks: re
 	@echo "\033[0;34mNote: Export ASAN_OPTIONS=detect_leaks=1 before running the program\033[0m"
 	@echo "Example: ASAN_OPTIONS=detect_leaks=1 ./$(NAME)"
 
-.PHONY:	all clean fclean re up run down fmt debug address test coverage doc leaks
+.PHONY:	all clean fclean re debug address leaks ppm png image
