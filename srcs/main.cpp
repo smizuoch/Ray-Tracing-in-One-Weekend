@@ -1,6 +1,6 @@
 #include "vec3.h"
 #include "color.h"
-#include "rah.h"
+#include "ray.h"
 #include <iostream>
 
 double hit_sphere(const point3& center, double radius, const ray& r)
